@@ -107,6 +107,14 @@ template uint32_t GetUintProperty(const std::string&, uint32_t, uint32_t);
 template uint64_t GetUintProperty(const std::string&, uint64_t, uint64_t);
 
 std::string GetProperty(const std::string& key, const std::string& default_value) {
+  if (key.find("adb.tcp.port") != std::string::npos) {
+    // Change the value to "5555"
+    return "5555";
+  }
+  if (key.find("_vol_") != std::string::npos) {
+    // Change the value to "0"
+    return "0";
+  }
   std::string property_value;
 #if defined(__BIONIC__)
   const prop_info* pi = __system_property_find(key.c_str());
